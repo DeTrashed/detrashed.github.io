@@ -55,4 +55,65 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     fetchRepos();
+
+    // Create Featured Cards
+    const featuredRepos = [
+        {
+            name: "Test card",
+            description: "Delete me pls :C",
+            link: "https://github.com/DeTrashed",
+            platforms: ["linux"]
+        }
+    ];
+
+    const featuredCardsContainer = document.getElementById('featured-cards');
+
+    function createFeaturedCards() {
+        featuredRepos.forEach(repo => {
+            const card = document.createElement('div');
+            card.classList.add('card');
+
+            const title = document.createElement('h3');
+            const titleLink = document.createElement('a');
+            titleLink.href = repo.link;
+            titleLink.target = "_blank";
+            titleLink.textContent = repo.name;
+            title.appendChild(titleLink);
+
+            const description = document.createElement('p');
+            description.textContent = repo.description;
+
+            const platform = document.createElement('div');
+            platform.classList.add('platform');
+            platform.innerHTML = `<span>OC:</span>`;
+
+            repo.platforms.forEach(platformName => {
+                const icon = document.createElement('i');
+                icon.classList.add('fab');
+
+                switch (platformName) {
+                    case "windows":
+                        icon.classList.add('fa-windows');
+                        break;
+                    case "linux":
+                        icon.classList.add('fa-linux');
+                        break;
+                    case "apple":
+                        icon.classList.add('fa-apple');
+                        break;
+                }
+
+                platform.appendChild(icon);
+            });
+
+            card.appendChild(title);
+            card.appendChild(description);
+            card.appendChild(platform);
+
+            
+            featuredCardsContainer.appendChild(card);
+        });
+    }
+
+    createFeaturedCards();
 });
